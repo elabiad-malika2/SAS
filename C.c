@@ -52,7 +52,7 @@ void AjouterOne()
 
     do
     {
-        printf("Departements :\n \t1- 1- Math | 2- Physique | 3- Informatique | 4- Economie  \n");
+        printf("Departements :\n \t- 1- Math | 2- Physique | 3- Informatique | 4- Economie  \n");
         printf("Entrer : \n");
         scanf("%d", &choix);
 
@@ -102,9 +102,9 @@ void AjouteMultiple()
 
 // Affichage les details des etudiants
 void Affiche(){
-    printf("\t\t+-------------------------------------------------------------------------------------------+\n");
-    printf("\t\t| Id |        Nom         |      Prenom     | Date Naissance |    Departement   |    Note   |\n");
-    printf("\t\t+-------------------------------------------------------------------------------------------+\n");
+    printf("\t\t+--------------------------------------------------------------------------------------------+\n");
+    printf("\t\t| Id |        Nom         |      Prenom     | Date Naissance |    Departement   |    Note    |\n");
+    printf("\t\t+--------------------------------------------------------------------------------------------+\n");
     for (int i = 0; i < NE; i++)
     {
        printf("\t\t| %-2d | %-20s | %-20s | %2d-%2d-%4d  | %-11s | %.2f |\n", E[i].id, E[i].nom, E[i].prenom, E[i].date_naissance.jours, E[i].date_naissance.mois, E[i].date_naissance.annee, E[i].depatement,E[i].note);
@@ -217,7 +217,7 @@ void Supprimer(){
         printf("ID invalid. \n");
     }
     id--;
-    for (int i = 0; i < NE; i++)
+    for (int i = id; i < NE-1; i++)
     {
 
         E[i]=E[i+1];
@@ -339,7 +339,7 @@ void Recherche(){
                 printf("\t\t*************************************************\n");
                 trouve = 1;
         }
-        
+
         }
         if (trouve != 1)
         {
@@ -358,7 +358,7 @@ void Recherche(){
                 trouve = 1;
 
         }
-       
+
         }
          if (trouve != 1)
         {
@@ -457,8 +457,8 @@ void triStatus(){
     for (int i = 0; i < NE; i++)
     {
         status(&sta,E[i].note);
-        printf("\t\t| %2d | %20s | %15s | %15s | %15s | %20.2f | %12s |\n",
-               E[i].id, E[i].nom, E[i].prenom, E[i].date_naissance, E[i].depatement, E[i].note, sta);
+        printf("\t\t| %2d | %10s | %10s | %2d-%2d-%4d | %14s | %10.2f | %15s |\n",
+               E[i].id, E[i].nom, E[i].prenom, E[i].date_naissance.jours, E[i].date_naissance.mois, E[i].date_naissance.annee, E[i].depatement, E[i].note, sta);
     }
 
 
@@ -680,7 +680,7 @@ void programmeMenu() {
                 Statistiques();
                 break;
             case 11 :
-                system("exit");
+                return;
 
 
             default:
@@ -700,8 +700,8 @@ void InitialiserEtudiants() {
         {6, "Leroy", "Chantal", {6, 6, 2005}, Depatement2, 11.5, "Passable"},
         {7, "Petit", "Claude", {7, 7, 2006}, Depatement3, 15.0, "Assez-bien"},
         {8, "Gauthier", "Élise", {8, 8, 2007}, Depatement4, 13.0, "Assez-bien"},
-        {9, "Rousseau", "Alain", {9, 9, 2008}, Depatement1, 18.0, "Excellent"},
-        {10, "Moulin", "Alice", {10, 10, 2009}, Depatement2, 12.0, "Passable"}
+        {9, "Rousseau", "Alain", {9, 9, 2004}, Depatement1, 18.0, "Excellent"},
+        {10, "Moulin", "Alice", {10, 10, 2003}, Depatement2, 12.0, "Passable"}
     };
 
     // Copier les valeurs dans le tableau global E
