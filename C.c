@@ -33,7 +33,7 @@ int NE = 0;
 void AjouterOne()
 {
     int choix;
-    E[NE].id = NE + 1;
+    E[NE].id = NE+1;
     printf("Le nom d'etudiant : ");
     scanf(" %[^\n]", E[NE].nom);
     getchar();
@@ -75,7 +75,7 @@ void AjouterOne()
         break;
     }
     printf("La note d'etudiant : \n");
-    scanf("%.2f", &E[NE].note);
+    scanf("%f", &E[NE].note);
     NE++;
 };
 
@@ -288,6 +288,68 @@ void MoyenneUniversite(){
     
 
 };
+            // La recherche d'etudiant :
+void Recherche(){
+    char nom[50];
+    char depart[50];
+    int choix,trouve;
+    printf("Cherchez l'etudiant que vous voulez \n");
+    printf("1.Rechercher un étudiant par son nom.");
+    printf("2.Recher la liste des étudiants inscrits dans un département spécifique");
+    scanf("%d",&choix);
+    switch (choix)
+    {
+    case 1:
+        printf("Entrez le nom d'etudiants : ");
+        scanf("%[^\n]", nom);
+        for (int i = 0; i < NE; i++)
+        {
+            if (strcmp(E[i].nom,nom)==0)
+        {
+            printf("Etudiant trouvee :\n");
+                printf("ID: %d\n", E[i].id);
+                printf("Nom: %s\n", E[i].nom);
+                printf("Prenom: %s\n", E[i].prenom);
+                printf("Date de naissance: %d-%d-%d\n", E[i].date_naissance.jours, E[i].date_naissance.mois, E[i].date_naissance.annee);
+                printf("Departement : %d \n", E[i].depatement);
+                printf("Note: %s\n", E[i].note);
+                trouve = 1;
+        }
+        if (trouve != 1)
+        {
+            printf("Aucun etudiant trouver avec le nom %s.\n", nom);
+        }
+        }
+        break;
+    case 2 :
+        printf("Entrez une departement : ");
+        scanf("%[^\n]", depart);
+        for (int i = 0; i < NE; i++)
+        {
+            if (strcmp(E[i].depatement,depart)==0)
+        {
+            printf("Etudiant trouvee :\n");
+                printf("ID: %d\n", E[i].id);
+                printf("Nom: %s\n", E[i].nom);
+                printf("Prenom: %s\n", E[i].prenom);
+                printf("Date de naissance: %d-%d-%d\n", E[i].date_naissance.jours, E[i].date_naissance.mois, E[i].date_naissance.annee);
+                printf("Departement : %d \n", E[i].depatement);
+                printf("Note: %s\n", E[i].note);
+                printf("\t\t*************************************************\n");
+                trouve = 1;
+                
+        }
+        if (trouve != 1)
+        {
+            printf("Aucune departement trouver avec le nom %s.\n", depart);
+        }
+        }
+    
+    default:
+        break;
+    }
+
+};
 
 // Affichage des detaila des etudiants
 void Affiche(){
@@ -298,7 +360,7 @@ void Affiche(){
     {
        printf("\t\t| %-2d | %-20s | %-20s | %2d-%2d-%4d  | %-11s | %.2f |\n", E[i].id, E[i].nom, E[i].prenom, E[i].date_naissance.jours, E[i].date_naissance.mois, E[i].date_naissance.annee, E[i].depatement,E[i].note);
     }
-    printf("\t\t+------------------------------------------------------------------------------+\n");
+    printf("\t\t+-------------------------------------------------------------------------------------------+\n");
 };
 
 int main()
