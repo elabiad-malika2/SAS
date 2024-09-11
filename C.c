@@ -185,7 +185,31 @@ void Modifier()
         break;
     }
 };
+            // Supprimer etudiants
+void Supprimer(){
+    int id;
+    if (NE==0)
+    {
+        printf("Aucun etudiant a supprimer");
+    }
+    printf("Entrer l'id d'etudiant a supprime : ");
+    scanf("%d",&id);
+    if (id<=0 && id>NE)
+    {
+        printf("ID invalid");
+    }
+    id--;
+    for (int i = 0; i < NE-1; i++)
+    {
+        
+        E[i+1]=E[i];
+    }
+    
+    NE--;
+    printf("l'etudiant est supprime");
+    
 
+};
 
 int main()
 {
