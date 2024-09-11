@@ -119,7 +119,9 @@ void Modifier()
     if (NE == 0)
     {
         printf("Aucun etudiant a modifie");
+        return;
     }
+    Affiche();
     printf("Entrer l'id d'etudiant : ");
     scanf("%d", &id);
     if (id < 0 || id > NE)
@@ -386,10 +388,11 @@ void triAlph(){
     Affiche();
 
 };
+// tri plus eleve au plus faibe
 void triNote(){
     for (int i = 0; i < NE-1; i++)
     {
-        for (int j = 0; j < NE; i++)
+        for (int j = i+1; j < NE; j++)
         {
             if (E[i].note<E[j].note)
             {
@@ -407,7 +410,7 @@ void triNote(){
 
 
 };
-void status(char status,float note){
+void status(char *status,float note){
     if (note>=10)
         {
             if (note>=10 && note<=12)
@@ -448,8 +451,8 @@ void triStatus(){
     char sta[50];
     for (int i = 0; i < NE; i++)
     {
-        status(sta,E[i].note);
-        printf("\t\t| %-2d | %-20s | %-15s | %-15s | %-15s | %-20.2f | %-12s |\n",
+        status(&sta,E[i].note);
+        printf("\t\t| %2d | %20s | %15s | %15s | %15s | %20.2f | %12s |\n",
                E[i].id, E[i].nom, E[i].prenom, E[i].date_naissance, E[i].depatement, E[i].note, sta);
     }
 
@@ -482,25 +485,151 @@ void Triage(){
     }
 
 };
+            // Statistiques
+// Afficher le nombre total des etudiants
+void AfficherNbrEt(){
+    printf("Le nombre d'etudiant inscrit : %d", NE);
+
+};
+// Afficher le nombre des etudiants par departement
+void AfficheNbEtDep(){
+     int countMath=0 , countPh=0 , countInfo, countEco=0;
+
+
+    for (int i = 0; i < NE; i++)
+    {
+        if (strcmp(E[i].depatement,Depatement1)==0)
+    {
+
+        countMath++;
+    }
+       else if (strcmp(E[i].depatement,Depatement2)==0)
+    {
+
+        countPh++;
+    }
+      else if (strcmp(E[i].depatement,Depatement3)==0)
+    {
+
+        countInfo++;
+    }
+      else if (strcmp(E[i].depatement,Depatement4)==0)
+    {
+
+        countEco++;
+    }
+    }
+    if (countMath>0)
+    {
+        printf("Le nombres des etudiants qui sont inscrit dans Math : %d \n",countMath);
+    }else{
+        printf("Pas d'etudiants en Math\n");
+    }
+    if (countPh>0)
+    {
+        printf("Le nombres des etudiants qui sont inscrit dans Physique : %.d \n",countPh);
+    }else{
+        printf("Pas d'etudiants en Physique\n");
+    }
+    if (countInfo>0)
+    {
+        printf("Le nombres des etudiants qui sont inscrit dans Informatique : %d \n",countInfo);
+    }else{
+        printf("Pas d'etudiants en Informatique\n");
+    }
+    if (countEco>0)
+    {
+        printf("Le nombres des etudiants qui sont inscrit dans Economie : %d \n",countEco);
+    }else{
+        printf("Pas d'etudiants en Economie\n");
+    }
+
+};
+// Afficher les etudiants ayant une moyenne superieure a un seuil :
+void AfficherSeuil(){
+    float seuil ;
+    printf("Veuillez entrer le seuil : ");
+    scanf("%f",&seuil);
+    for (int i = 0; i < NE; i++)
+    {
+        if (E[i].note>seuil)
+        {
+            afficheEt(E[i]);
+        }
+
+    }
+
+
+};
+// les 3 meilleurs etudiants :
+void Affichemeil(){
+    triNote();
+    for (int i = 0; i < 3; i++)
+    {
+        afficheEt(E[i]);
+    }
+
+};
+// Afficher nbre ayant la note supperieure a 10
+void afficheSup(){
+    for (int i = 0; i < NE; i++)
+    {
+        if (E[i].note>=10)
+        {
+            afficheEt(E[i]);
+        }
+
+    }
+
+
+};
+void Statistiques(){
+
+    int choix;
+    printf("1. Nombre total des etudiants\n2. Nombre des etudiants par departement\n3. Etudiants ayant une note superieure à un seuil\n4. Top 3 etudiants\n5. Nombre des etudiants ayant reussi par departement\n");
+                printf("Choisissez une option: ");
+                scanf("%d", &choix);
+                switch (choix) {
+                    case 1:
+                        AfficherNbrEt();
+                        break;
+                    case 2:
+                        AfficheNbEtDep();
+                        break;
+                    case 3:
+                        AfficherSeuil();
+                        break;
+                    case 4:
+                        Affichemeil();
+                        break;
+                    case 5:
+                        afficheSup();
+                        break;
+                    default:
+                        printf("Option invalide.\n");
+                        break;
+                }
+
+};
 
 
 
 void programmeMenu() {
     int choix;
     do {
-        printf("\n**************** l'universite Youcode ***************\n");
-        printf("\n1. Ajouter un etudiant\n");
-        printf("2. Ajouter un etudiant\n");
-        printf("3. Modifier un etudiant\n");
-        printf("4. Supprimer un etudiant\n");
-        printf("5. Afficher la moyenne generale par departement\n");
-        printf("6. Afficher la moyenne de l'universite\n");
-        printf("7. Afficher les details des etudiants\n");
-        printf("8. Rechercher un etudiant\n");
-        printf("9. Tri des etudiant\n");
-        printf("10. Afficher les statistiques\n");
-        printf("11. Quitter\n\n");
-        printf("*\n");
+        printf("\t\n**************** Ecole Youcode ***************\n");
+        printf("\t1. Ajouter un etudiant\n");
+        printf("\t2.  Ajouter plusieurs etudiants\n");
+        printf("\t3.  Modifier un etudiant\n");
+        printf("\t4.  Supprimer un etudiant\n");
+        printf("\t5.  Afficher la moyenne generale par departement\n");
+        printf("\t6.  Afficher la moyenne de l'universite\n");
+        printf("\t7.  Afficher les details des etudiants\n");
+        printf("\t8.  Rechercher un etudiant\n");
+        printf("\t9.  Tri des etudiant\n");
+        printf("\t10. Afficher les statistiques\n");
+        printf("\t11. Quitter\n\n");
+        printf("\t\n**********************************************\n");
         printf("Choisissez une option : ");
         scanf("%d", &choix);
 
@@ -530,26 +659,56 @@ void programmeMenu() {
                 MoyenneUniversite();
                 break;
             case 7:
+                system("cls");
                 Affiche();
                 break;
             case 8:
+                system("cls");
                 Recherche();
                 break;
             case 9:
+                system("cls");
                 Triage();
                 break;
+            case 10:
+                system("cls");
+                Statistiques();
+                break;
             case 11 :
-                system("close");
+                system("exit");
 
 
             default:
                 printf("Option invalide. Veuillez reessayer.\n");
                 break;
         }
-    } while (choix = 11);
+    } while (choix != 11);
 }
+void InitialiserEtudiants() {
+    // Exemples d'étudiants
+    etudiants exemples[10] = {
+        {1, "Dupont", "Pierre", {1, 1, 2000}, Depatement1, 12.5, "Passable"},
+        {2, "Durand", "Marie", {2, 2, 2001}, Depatement2, 14.0, "Assez-bien"},
+        {3, "Martin", "Jean", {3, 3, 2002}, Depatement3, 16.5, "Bien"},
+        {4, "Lemoine", "Sophie", {4, 4, 2003}, Depatement4, 17.0, "Excellent"},
+        {5, "Dubois", "Luc", {5, 5, 2004}, Depatement1, 10.0, "Passable"},
+        {6, "Leroy", "Chantal", {6, 6, 2005}, Depatement2, 11.5, "Passable"},
+        {7, "Petit", "Claude", {7, 7, 2006}, Depatement3, 15.0, "Assez-bien"},
+        {8, "Gauthier", "Élise", {8, 8, 2007}, Depatement4, 13.0, "Assez-bien"},
+        {9, "Rousseau", "Alain", {9, 9, 2008}, Depatement1, 18.0, "Excellent"},
+        {10, "Moulin", "Alice", {10, 10, 2009}, Depatement2, 12.0, "Passable"}
+    };
+
+    // Copier les valeurs dans le tableau global E
+    for (int i = 0; i < 10; i++) {
+        E[i] = exemples[i];
+    }
+    NE = 10; // Nombre d'étudiants initialisés
+}
+
 int main()
 {
+    InitialiserEtudiants();
     programmeMenu();
 
     return 0;
