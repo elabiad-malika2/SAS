@@ -321,7 +321,7 @@ void Recherche(){
     char depart[50];
     int choix,trouve;
     printf("Cherchez l'etudiant que vous voulez \n");
-    printf("1.Rechercher un étudiant par son nom.\n");
+    printf("1.Rechercher un etudiant par son nom.\n");
     printf("2.Recher la liste des etudiants inscrits dans un departement specifique. \n");
     scanf("%d",&choix);
     getchar();
@@ -690,7 +690,7 @@ void programmeMenu() {
     } while (choix != 11);
 }
 void InitialiserEtudiants() {
-    // Exemples d'étudiants
+    // Exemples d'etudiants
     etudiants exemples[10] = {
         {1, "Dupont", "Pierre", {1, 1, 2000}, Depatement1, 12.5, "Passable"},
         {2, "Durand", "Marie", {2, 2, 2001}, Depatement2, 14.0, "Assez-bien"},
@@ -699,7 +699,7 @@ void InitialiserEtudiants() {
         {5, "Dubois", "Luc", {5, 5, 2004}, Depatement1, 10.0, "Passable"},
         {6, "Leroy", "Chantal", {6, 6, 2005}, Depatement2, 11.5, "Passable"},
         {7, "Petit", "Claude", {7, 7, 2006}, Depatement3, 15.0, "Assez-bien"},
-        {8, "Gauthier", "Élise", {8, 8, 2007}, Depatement4, 13.0, "Assez-bien"},
+        {8, "Gauthier", "elise", {8, 8, 2007}, Depatement4, 13.0, "Assez-bien"},
         {9, "Rousseau", "Alain", {9, 9, 2004}, Depatement1, 18.0, "Excellent"},
         {10, "Moulin", "Alice", {10, 10, 2003}, Depatement2, 12.0, "Passable"}
     };
@@ -708,7 +708,7 @@ void InitialiserEtudiants() {
     for (int i = 0; i < 10; i++) {
         E[i] = exemples[i];
     }
-    NE = 10; // Nombre d'étudiants initialisés
+    NE = 10; // Nombre d'etudiants initialises
 }
 
 int main()
