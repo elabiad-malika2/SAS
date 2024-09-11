@@ -3,10 +3,10 @@
 #include <string.h>
 
 
-#define Depatement1 'Math'
-#define Depatement2 'Physique'
-#define Depatement3 'Informatique'
-#define Depatement4 'Economie'
+#define Depatement1 "Math"
+#define Depatement2 "Physique"
+#define Depatement3 "Informatique"
+#define Depatement4 "Economie"
 #define max_etudiants 100
 
 typedef struct
@@ -22,6 +22,7 @@ typedef struct
     date date_naissance;
     char depatement[100];
     float note;
+    char status[50];
 } etudiants;
 
 etudiants E[100];
@@ -99,10 +100,22 @@ void AjouteMultiple()
     }
 }
 
+// Affichage les details des etudiants
+void Affiche(){
+    printf("\t\t+-------------------------------------------------------------------------------------------+\n");
+    printf("\t\t| Id |        Nom         |      Prenom     | Date Naissance |    Departement   |    Note   |\n");
+    printf("\t\t+-------------------------------------------------------------------------------------------+\n");
+    for (int i = 0; i < NE; i++)
+    {
+       printf("\t\t| %-2d | %-20s | %-20s | %2d-%2d-%4d  | %-11s | %.2f |\n", E[i].id, E[i].nom, E[i].prenom, E[i].date_naissance.jours, E[i].date_naissance.mois, E[i].date_naissance.annee, E[i].depatement,E[i].note);
+    }
+    printf("\t\t+----------------------------------------------------------------------------------------------+\n");
+};
+
 // Modifier Etudiant :
 void Modifier()
 {
-    int id, choix;
+    int id, choix,choix2;
     if (NE == 0)
     {
         printf("Aucun etudiant a modifie");
@@ -147,16 +160,16 @@ void Modifier()
         printf("La date est modifie avec succes.\n");
         break;
     case 4:
-        printf("Entrer la date a modifie : \n");
+        printf("Entrer le departement a modifie : \n");
 
         do
         {
             printf("Departements :\n \t1- 1- Math | 2- Physique | 3- Informatique | 4- Economie  \n");
-            printf("Entrer : \n");
-            scanf("%d", &choix);
+            printf("Entrer : ");
+            scanf("%d", &choix2);
 
-        } while (choix <= 0 || choix >= 5);
-        switch (choix)
+        } while (choix2 <= 0 || choix2 >= 5);
+        switch (choix2)
         {
         case 1:
             strcpy(E[id].depatement, Depatement1);
@@ -203,13 +216,13 @@ void Supprimer(){
     id--;
     for (int i = 0; i < NE-1; i++)
     {
-        
+
         E[i]=E[i+1];
     }
-    
+
     NE--;
     printf("l'etudiant est supprime.\n");
-    
+
 
 };
                  // Moyenne
@@ -265,7 +278,7 @@ void MoyenneDepartement(){
     }else{
         printf("Pas d'etudiants en Economie\n");
     }
-    
+
 };
 
 // Moyenne de toute universite :
@@ -285,34 +298,41 @@ void MoyenneUniversite(){
     else{
         printf("Pas d'etudiants dans l'universite.\n");
     }
-    
+
 
 };
+// affich
+void afficheEt(etudiants e){
+    printf("Etudiant trouvee :\n");
+                printf("ID: %d\n", e.id);
+                printf("Nom: %s\n", e.nom);
+                printf("Prenom: %s\n", e.prenom);
+                printf("Date de naissance: %d-%d-%d\n", e.date_naissance.jours, e.date_naissance.mois, e.date_naissance.annee);
+                printf("Departement : %s \n", e.depatement);
+                printf("Note: %f\n", e.note);
+
+}
             // La recherche d'etudiant :
 void Recherche(){
     char nom[50];
     char depart[50];
     int choix,trouve;
     printf("Cherchez l'etudiant que vous voulez \n");
-    printf("1.Rechercher un étudiant par son nom.");
-    printf("2.Recher la liste des étudiants inscrits dans un département spécifique");
+    printf("1.Rechercher un étudiant par son nom.\n");
+    printf("2.Recher la liste des etudiants inscrits dans un departement specifique. \n");
     scanf("%d",&choix);
+    getchar();
     switch (choix)
     {
     case 1:
         printf("Entrez le nom d'etudiants : ");
         scanf("%[^\n]", nom);
+        getchar();
         for (int i = 0; i < NE; i++)
         {
             if (strcmp(E[i].nom,nom)==0)
         {
-            printf("Etudiant trouvee :\n");
-                printf("ID: %d\n", E[i].id);
-                printf("Nom: %s\n", E[i].nom);
-                printf("Prenom: %s\n", E[i].prenom);
-                printf("Date de naissance: %d-%d-%d\n", E[i].date_naissance.jours, E[i].date_naissance.mois, E[i].date_naissance.annee);
-                printf("Departement : %d \n", E[i].depatement);
-                printf("Note: %s\n", E[i].note);
+                afficheEt(E[i]);
                 trouve = 1;
         }
         if (trouve != 1)
@@ -329,43 +349,208 @@ void Recherche(){
             if (strcmp(E[i].depatement,depart)==0)
         {
             printf("Etudiant trouvee :\n");
-                printf("ID: %d\n", E[i].id);
-                printf("Nom: %s\n", E[i].nom);
-                printf("Prenom: %s\n", E[i].prenom);
-                printf("Date de naissance: %d-%d-%d\n", E[i].date_naissance.jours, E[i].date_naissance.mois, E[i].date_naissance.annee);
-                printf("Departement : %d \n", E[i].depatement);
-                printf("Note: %s\n", E[i].note);
+                afficheEt(E[i]);
                 printf("\t\t*************************************************\n");
                 trouve = 1;
-                
+
         }
         if (trouve != 1)
         {
             printf("Aucune departement trouver avec le nom %s.\n", depart);
         }
         }
-    
+
     default:
         break;
     }
 
 };
 
-// Affichage des detaila des etudiants
-void Affiche(){
-    printf("\t\t+-------------------------------------------------------------------------------------------+\n");
-    printf("\t\t| Id |        Nom         |      Prenom     | Date Naissance |    Departement   |    Note   |\n");
-    printf("\t\t+-------------------------------------------------------------------------------------------+\n");
+            // Triage
+// tri Alphabetique
+void triAlph(){
+    for (int i = 0; i < NE-1; i++)
+    {
+        for (int j = i+1; j < NE; j++)
+        {
+            if (strcasecmp(E[i].nom,E[j].nom)<0)
+            {
+                etudiants temp =E[j];
+                E[j]=E[i];
+                E[i]=temp;
+            }
+
+        }
+
+    }
+    Affiche();
+
+};
+void triNote(){
+    for (int i = 0; i < NE-1; i++)
+    {
+        for (int j = 0; j < NE; i++)
+        {
+            if (E[i].note<E[j].note)
+            {
+                etudiants temp=E[j];
+                E[j]=E[i];
+                E[i]=temp;
+
+            }
+
+        }
+
+    }
+    Affiche();
+
+
+
+};
+void status(char status,float note){
+    if (note>=10)
+        {
+            if (note>=10 && note<=12)
+            {
+                strcpy(status,"Passable");
+
+            }
+            else if ( note<=14)
+            {
+                strcpy(status,"Assez-bien");
+
+            }
+            else if ( note<=16)
+            {
+                strcpy(status,"bien");
+
+            }
+            else
+            {
+                strcpy(status,"Excellent");
+
+            }
+
+        }
+};
+void triStatus(){
+      for (int i = 1; i < NE; i++)
+    {
+        float temp = E[i].note;
+        int j = i - 1;
+        while (temp > E[j].note && j >= 0)
+        {
+            E[j + 1].note = E[j].note;
+            j--;
+        }
+        E[j + 1].note = temp;
+    }
+    char sta[50];
     for (int i = 0; i < NE; i++)
     {
-       printf("\t\t| %-2d | %-20s | %-20s | %2d-%2d-%4d  | %-11s | %.2f |\n", E[i].id, E[i].nom, E[i].prenom, E[i].date_naissance.jours, E[i].date_naissance.mois, E[i].date_naissance.annee, E[i].depatement,E[i].note);
+        status(sta,E[i].note);
+        printf("\t\t| %-2d | %-20s | %-15s | %-15s | %-15s | %-20.2f | %-12s |\n",
+               E[i].id, E[i].nom, E[i].prenom, E[i].date_naissance, E[i].depatement, E[i].note, sta);
     }
-    printf("\t\t+-------------------------------------------------------------------------------------------+\n");
+
+
+
 };
 
+void Triage(){
+    int choix ;
+    printf("\t\tMenu triage :\n");
+        printf("\t\t1. tri alphabetique.\n");
+        printf("\t\t2. tri moyenne general\n");
+        printf("\t\t3. tri par status de reussite\n");
+        printf("\t\tEnter votre choix (1-3): ");
+        scanf("%d", &choix);
+    switch (choix)
+    {
+    case 1:
+        triAlph();
+        break;
+    case 2:
+        triNote();
+        break;
+    case 3:
+        triStatus();
+        break;
+
+    default:
+        break;
+    }
+
+};
+
+
+
+void programmeMenu() {
+    int choix;
+    do {
+        printf("\n**************** l'universite Youcode ***************\n");
+        printf("\n1. Ajouter un etudiant\n");
+        printf("2. Ajouter un etudiant\n");
+        printf("3. Modifier un etudiant\n");
+        printf("4. Supprimer un etudiant\n");
+        printf("5. Afficher la moyenne generale par departement\n");
+        printf("6. Afficher la moyenne de l'universite\n");
+        printf("7. Afficher les details des etudiants\n");
+        printf("8. Rechercher un etudiant\n");
+        printf("9. Tri des etudiant\n");
+        printf("10. Afficher les statistiques\n");
+        printf("11. Quitter\n\n");
+        printf("*\n");
+        printf("Choisissez une option : ");
+        scanf("%d", &choix);
+
+        switch (choix) {
+            case 1:
+                system("cls");
+                AjouterOne();
+                break;
+            case 2:
+                system("cls");
+                AjouteMultiple();
+                break;
+            case 3:
+                system("cls");
+                Modifier();
+                break;
+            case 4:
+                system("cls");
+                Supprimer();
+                break;
+            case 5:
+                system("cls");
+                MoyenneDepartement();
+                break;
+            case 6:
+                system("cls");
+                MoyenneUniversite();
+                break;
+            case 7:
+                Affiche();
+                break;
+            case 8:
+                Recherche();
+                break;
+            case 9:
+                Triage();
+                break;
+            case 11 :
+                system("close");
+
+
+            default:
+                printf("Option invalide. Veuillez reessayer.\n");
+                break;
+        }
+    } while (choix = 11);
+}
 int main()
 {
-    AjouteMultiple();
+    programmeMenu();
 
     return 0;
 }
