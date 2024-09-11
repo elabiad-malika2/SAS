@@ -21,7 +21,7 @@ typedef struct
     char prenom[100];
     date date_naissance;
     char depatement[100];
-    int note;
+    float note;
 } etudiants;
 
 etudiants E[100];
@@ -75,7 +75,7 @@ void AjouterOne()
         break;
     }
     printf("La note d'etudiant : \n");
-    scanf("%d", &E[NE].note);
+    scanf("%.2f", &E[NE].note);
 };
 
 // Ajouter plusieurs :
@@ -175,7 +175,7 @@ void Modifier()
         break;
     case 5:
         printf("Entrer la note a modifie : ");
-        scanf("%d",&E[id].note);
+        scanf("%.2f",&E[id].note);
         printf("La note est modifie avec succes.\n");
         break;
 
@@ -209,6 +209,59 @@ void Supprimer(){
     printf("l'etudiant est supprime");
     
 
+};
+void MoyenneDepartement(){
+    int countMath=0 , countPh=0 , countInfo, countEco=0;
+    int sumMath=0 ,sumPh=0 , sumInfo=0 , sumEco=0;
+
+    for (int i = 0; i < NE; i++)
+    {
+        if (strcmp(E[i].depatement,Depatement1)==0)
+    {
+        sumMath+=E[i].note;
+        countMath++;
+    }
+       else if (strcmp(E[i].depatement,Depatement2)==0)
+    {
+        sumPh+=E[i].note;
+        countPh++;
+    }
+      else if (strcmp(E[i].depatement,Depatement3)==0)
+    {
+        sumInfo+=E[i].note;
+        countInfo++;
+    }
+      else if (strcmp(E[i].depatement,Depatement4)==0)
+    {
+        sumEco+=E[i].note;
+        countEco++;
+    }
+    }
+    if (countMath>0)
+    {
+        printf("Moyenne Math : %.2f \n",(float)sumMath/countMath);
+    }else{
+        printf("Pas d'etudiants en Math\n");
+    }
+    if (countPh>0)
+    {
+        printf("Moyenne Physique : %.2f \n",(float)sumPh/countPh);
+    }else{
+        printf("Pas d'etudiants en Physique\n");
+    }
+    if (countInfo>0)
+    {
+        printf("Moyenne Informatique : %.2f \n",(float)sumInfo/countInfo);
+    }else{
+        printf("Pas d'etudiants en Informatique\n");
+    }
+    if (countEco>0)
+    {
+        printf("Moyenne Economie : %.2f \n",(float)sumEco/countEco);
+    }else{
+        printf("Pas d'etudiants en Economie\n");
+    }
+    
 };
 
 int main()
