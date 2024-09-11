@@ -210,9 +210,11 @@ void Supprimer(){
     
 
 };
+                 // Moyenne
+// Moyenne par departement :
 void MoyenneDepartement(){
     int countMath=0 , countPh=0 , countInfo, countEco=0;
-    int sumMath=0 ,sumPh=0 , sumInfo=0 , sumEco=0;
+    float sumMath=0 ,sumPh=0 , sumInfo=0 , sumEco=0;
 
     for (int i = 0; i < NE; i++)
     {
@@ -239,29 +241,50 @@ void MoyenneDepartement(){
     }
     if (countMath>0)
     {
-        printf("Moyenne Math : %.2f \n",(float)sumMath/countMath);
+        printf("Moyenne Math : %.2f \n",sumMath/countMath);
     }else{
         printf("Pas d'etudiants en Math\n");
     }
     if (countPh>0)
     {
-        printf("Moyenne Physique : %.2f \n",(float)sumPh/countPh);
+        printf("Moyenne Physique : %.2f \n",sumPh/countPh);
     }else{
         printf("Pas d'etudiants en Physique\n");
     }
     if (countInfo>0)
     {
-        printf("Moyenne Informatique : %.2f \n",(float)sumInfo/countInfo);
+        printf("Moyenne Informatique : %.2f \n",sumInfo/countInfo);
     }else{
         printf("Pas d'etudiants en Informatique\n");
     }
     if (countEco>0)
     {
-        printf("Moyenne Economie : %.2f \n",(float)sumEco/countEco);
+        printf("Moyenne Economie : %.2f \n",sumEco/countEco);
     }else{
         printf("Pas d'etudiants en Economie\n");
     }
     
+};
+
+// Moyenne de toute universite :
+void MoyenneUniversite(){
+    int countDep=0;
+    float sumDep=0;
+
+    for (int i = 0; i < NE; i++)
+    {
+        sumDep+=0;
+        countDep++;
+    }
+    if (countDep>0)
+    {
+       printf("Moyenne de l'universite: %.2f\n",sumDep/countDep);
+    }
+    else{
+        printf("Pas d'etudiants dans l'universite");
+    }
+    
+
 };
 
 int main()
