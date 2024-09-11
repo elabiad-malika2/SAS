@@ -209,6 +209,7 @@ void Supprimer(){
     {
         printf("Aucun etudiant a supprimer");
     }
+    Affiche();
     printf("Entrer l'id d'etudiant a supprime : ");
     scanf("%d", &id);
     if (id<=0 && id>NE)
@@ -216,7 +217,7 @@ void Supprimer(){
         printf("ID invalid. \n");
     }
     id--;
-    for (int i = 0; i < NE-1; i++)
+    for (int i = 0; i < NE; i++)
     {
 
         E[i]=E[i+1];
@@ -335,12 +336,14 @@ void Recherche(){
             if (strcmp(E[i].nom,nom)==0)
         {
                 afficheEt(E[i]);
+                printf("\t\t*************************************************\n");
                 trouve = 1;
+        }
+        
         }
         if (trouve != 1)
         {
             printf("Aucun etudiant trouver avec le nom %s.\n", nom);
-        }
         }
         break;
     case 2 :
@@ -350,19 +353,21 @@ void Recherche(){
         {
             if (strcmp(E[i].depatement,depart)==0)
         {
-            printf("Etudiant trouvee :\n");
                 afficheEt(E[i]);
                 printf("\t\t*************************************************\n");
                 trouve = 1;
 
         }
-        if (trouve != 1)
+       
+        }
+         if (trouve != 1)
         {
             printf("Aucune departement trouver avec le nom %s.\n", depart);
         }
-        }
+        break;
 
     default:
+        printf("Choix Invalid");
         break;
     }
 
@@ -618,7 +623,7 @@ void programmeMenu() {
     int choix;
     do {
         printf("\t\n**************** Ecole Youcode ***************\n");
-        printf("\t1. Ajouter un etudiant\n");
+        printf("\t1.  Ajouter un etudiant\n");
         printf("\t2.  Ajouter plusieurs etudiants\n");
         printf("\t3.  Modifier un etudiant\n");
         printf("\t4.  Supprimer un etudiant\n");
